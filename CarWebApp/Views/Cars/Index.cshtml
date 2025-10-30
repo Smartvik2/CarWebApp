@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CarWebApp.Models.Car>
+
+@{
+    ViewBag.Title = "Available Cars";
+}
+
+<h2 class="text-center mt-3">Available Cars</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info text-center mt-4">No cars available yet.</div>
+}
+else
+{
+    <div class="row mt-4">
+        @foreach (var car in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    @if (car.Images != null && car.Images.Any())
+                    {
+                        <img src="@Url.Content(car.Images.First().FilePath)"
+                             class="card-img-top"
+                             alt="Car image"
+                             style="height: 200px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <img src="~/images/no-image.png"
+                             class="card-img-top"
+                             alt="No image"
+                             style="height: 200px; object-fit: cover;" />
+                    }
+
+                    <div class="card-body">
+                        <h5 class="card-title">@car.Make @car.Model</h5>
+                        <p class="card-text text-muted">@car.Year</p>
+                        <p><strong>₦@string.Format("{0:N0}", car.Price)</strong></p>
+                        <a asp-action="Details" asp-route-id="@car.Id" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

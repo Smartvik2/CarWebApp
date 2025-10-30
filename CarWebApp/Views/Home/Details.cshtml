@@ -1,0 +1,29 @@
+﻿@model CarWebApp.Models.Car
+
+@{
+    ViewBag.Title = $"{Model.Make} {Model.Model}";
+}
+
+<div class="container mt-4">
+    <h2>@Model.Make @Model.Model (@Model.Year)</h2>
+    <p><strong>Price:</strong> ₦@string.Format("{0:N0}", Model.Price)</p>
+    <p><strong>Description:</strong> @Model.Description</p>
+
+    <div class="row mt-3">
+        @if (Model.Images != null && Model.Images.Any())
+        {
+            @foreach (var img in Model.Images)
+            {
+                <div class="col-md-4 mb-3">
+                    <img src="@Url.Content(img.FilePath)" class="img-fluid rounded shadow-sm" alt="Car Image" />
+                </div>
+            }
+        }
+        else
+        {
+            <p>No images available for this car.</p>
+        }
+    </div>
+
+    <a asp-action="Index" class="btn btn-secondary mt-3">Back to list</a>
+</div>

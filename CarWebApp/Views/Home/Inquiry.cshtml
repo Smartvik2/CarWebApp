@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Submit Inquiry";
+}
+
+<h2>Submit Inquiry</h2>
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label>Your Name</label>
+        <input name="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Email</label>
+        <input name="Email" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Message</label>
+        <textarea name="Message" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
