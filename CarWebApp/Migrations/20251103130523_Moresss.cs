@@ -5,7 +5,7 @@
 namespace CarWebApp.Migrations
 {
     /// <inheritdoc />
-    public partial class Final : Migration
+    public partial class Moresss : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

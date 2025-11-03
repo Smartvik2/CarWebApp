@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251030134509_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251103131519_Newssss")]
+    partial class Newssss
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

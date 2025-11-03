@@ -1,4 +1,4 @@
-using CarWebApp.Data;
+﻿using CarWebApp.Data;
 using CarWebApp.Interface;
 using CarWebApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -6,8 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to container
 builder.Services.AddControllersWithViews();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Database connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -35,12 +36,21 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Car Web API v1");
+        c.RoutePrefix = "swagger";
+    });
+}
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
-// Auto-create DB and seed admin
 using (var scope = app.Services.CreateScope())
 {
     var ctx = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
